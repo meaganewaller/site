@@ -7,15 +7,21 @@ import FontSwap from '@/components/FontSwap'
 import RightSidebar from '@/components/RightSidebar'
 import Sidebar from '@/components/Sidebar'
 import ThemeSwap from '@/components/ThemeSwap'
+import type { MenuItem } from '@/types'
 
 interface LayoutProviderProps {
   children: React.ReactNode
   header: React.ReactNode
   footer: React.ReactNode
+  menus: {
+    title: string;
+    menu: MenuItem[];
+  }[]
 }
 
 export const LayoutProvider = ({
   children,
+  menus,
   header,
   footer,
 }: LayoutProviderProps) => {
@@ -29,7 +35,7 @@ export const LayoutProvider = ({
 
   const normalizedPathname = normalizePathname(pathname)
   const pagePaths = new Set(['/colophon', '/about', '/start-here', '/sitemap'])
-  const slugPaths = ['category', 'post']
+  const slugPaths = ['category', 'posts']
   const baseSegment = pathname?.split('/')[1] ?? ''
 
   const layoutType =
@@ -73,6 +79,7 @@ export const LayoutProvider = ({
         <ThemeSwap />
         <FontSwap />
         {header}
+        <Sidebar menus={menus} />
         <main className="[grid-area:main] bg-surface border-2 border-border border-t-0 p-8 w-full md:pt-30 md:overflow-y-auto">
           {children}
         </main>
@@ -101,6 +108,7 @@ export const LayoutProvider = ({
       <ThemeSwap />
       <FontSwap />
       {header}
+      <Sidebar menus={menus} />
       <main className="[grid-area:main] bg-surface border-2 border-border border-t-0 p-8 w-full md:overflow-y-auto md:pt-30">
         {children}
       </main>

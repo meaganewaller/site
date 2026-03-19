@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google'
 import localFont from 'next/font/local'
 import Link from 'next/link'
-import Loading from '@/components/Loading'
 import { CONFIG } from '@/config'
 import ClientThemeWrapper from '@/context/ClientThemeWrapper'
 import { FontProvider } from '@/context/FontContext'
 import { ThemeProvider } from '@/context/ThemeContext'
 import { LayoutProvider, MotionProvider } from '@/providers'
+import type { MenuItem } from '@/types'
 
 const basiicFont = localFont({
   src: [
@@ -158,6 +158,41 @@ export default async function RootLayout({
   header,
   footer,
 }: RootLayoutProps) {
+  const menus = [{
+    title: 'Info',
+    menu: [
+      {
+        key: 'about',
+        title: 'About',
+        order: 1,
+        path: '/about',
+        url: '/about',
+        parentId: null,
+        children: [],
+      },
+      {
+        key: 'colophon',
+        title: 'Colophon',
+        order: 2,
+        path: '/colophon',
+        url: '/colophon',
+        parentId: null,
+        children: [],
+      },
+      {
+        key: 'start-here',
+        title: 'Start Here',
+        order: 3,
+        path: '/start-here',
+        url: '/start-here',
+        parentId: null,
+        children: [],
+      }
+    ],
+  }] as {
+    title: string;
+    menu: MenuItem[];
+  }[]
 
   return (
     <html
@@ -178,7 +213,7 @@ export default async function RootLayout({
                 <Link href="/sitemap" id="skip-to-sitemap-link">
                   Go to Sitemap
                 </Link>
-                <LayoutProvider header={header} footer={footer}>
+                <LayoutProvider menus={menus} header={header} footer={footer}>
                   {/* ToastProvider provides site-wide toasts for client components */}
                   {/* Imported here so the provider is available throughout the app UI */}
                   {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import button from '~/images/gotlovesick.gif'
+import button from '~/images/meagan.gif'
 
 export function LinkBack() {
   return (
@@ -12,12 +12,12 @@ export function LinkBack() {
           src={button.src}
           height={31}
           width={88}
-          alt="88x31 button for GotLoveSick.com"
+          alt="88x31 button for meaganwaller.com"
         />
 
         <textarea
           rows={5}
-          defaultValue={`<a href="https://gotlovesick.com" target="_blank" title="GotLoveSick.com"><img src="https://raw.githubusercontent.com/meaganewaller/static/main/uploads/gotlovesick.gif" alt="GotLoveSick.com button" /></a>`}
+          defaultValue={`<a href="https://meaganwaller.com" target="_blank" title="meaganwaller.com"><img src="https://raw.githubusercontent.com/meaganewaller/static/main/uploads/meagan.gif" alt="MeaganWaller.com button" /></a>`}
         />
 
         <span>

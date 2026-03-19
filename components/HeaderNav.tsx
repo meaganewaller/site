@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-import { MenuItem } from '@/types'
+import type { MenuItem } from '@/types'
 
 type Menu = MenuItem[]
 
@@ -68,15 +68,28 @@ export function HeaderNav({ menu }: { menu: Menu }) {
   const [isMenuVisible, setIsMenuVisible] = useState(true)
 
   useEffect(() => {
+    const browserWindow = globalThis as typeof globalThis & {
+      innerWidth?: number
+      addEventListener?: (type: 'resize', listener: () => void) => void
+      removeEventListener?: (type: 'resize', listener: () => void) => void
+    }
+
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
-      setIsMenuVisible(!(window.innerWidth < 768))
+      const width =
+        typeof browserWindow.innerWidth === 'number'
+          ? browserWindow.innerWidth
+          : 0
+
+      setIsMobile(width < 768)
+      setIsMenuVisible(!(width < 768))
     }
 
     handleResize()
-    window.addEventListener('resize', handleResize)
 
-    return () => window.removeEventListener('resize', handleResize)
+    if (browserWindow.addEventListener && browserWindow.removeEventListener) {
+      browserWindow.addEventListener('resize', handleResize)
+      return () => browserWindow.removeEventListener?.('resize', handleResize)
+    }
   }, [])
 
   if (!menu || menu.length === 0) {
