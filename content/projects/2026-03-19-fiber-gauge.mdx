@@ -1,0 +1,46 @@
+---
+title: "fiber_gauge"
+summary: "A Ruby gem for calculating knitting and crochet gauge — stitches per inch, rows per inch, and required stitch counts."
+status: "active"
+stack: "ruby"
+repo: "https://github.com/meaganewaller/craftos"
+---
+
+## what is it
+
+fiber_gauge is a ruby gem that takes your swatch measurements and does the gauge math for you. you tell it how many stitches and rows you counted over a measured width, and it gives you stitches per inch (SPI), rows per inch (RPI), and can calculate how many stitches you need to hit a target width.
+
+## what it does
+
+- **SPI and RPI** — the two numbers every knitter and crocheter needs from their swatch
+- **required stitches** — "i want this piece to be 14 inches wide, how many stitches do i cast on?" (or chain, if you're crocheting)
+- **width for stitches** — the reverse: "i have 80 stitches, how wide will that be?"
+- built on [fiber_units](/projects/fiber-units) so all inputs and outputs are typed measurements
+
+## why
+
+gauge math is simple division, but i do it often enough and get it wrong often enough that it deserved its own gem. works the same whether you're knitting or crocheting — stitches are stitches. it also powers the [gauge calculator](/projects/gauge-calculator) web app.
+
+## example
+
+```ruby
+# knitting swatch
+knit_gauge = FiberGauge::Gauge.new(
+  stitches: 20.stitches,
+  rows: 28.rows,
+  width: 4.inches
+)
+
+knit_gauge.spi                          # => 5.0
+knit_gauge.required_stitches(14.inches) # => 70.stitches
+
+# crochet swatch — same API, different numbers
+crochet_gauge = FiberGauge::Gauge.new(
+  stitches: 14.stitches,
+  rows: 16.rows,
+  width: 4.inches
+)
+
+crochet_gauge.spi                          # => 3.5
+crochet_gauge.required_stitches(12.inches) # => 42.stitches
+```

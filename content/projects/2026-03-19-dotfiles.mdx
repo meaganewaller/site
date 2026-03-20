@@ -1,0 +1,63 @@
+---
+title: "dotfiles"
+summary: "Profile-aware dotfiles for macOS — layered brewfiles, unified theming, idempotent setup, and way too much thought put into a shell prompt."
+status: "active"
+stack: "bash, fish, lua, mise"
+repo: "https://github.com/meaganewaller/.dotfiles"
+---
+
+## what is it
+
+my dotfiles repo. it's the infrastructure-as-code approach to "how do i set up a new laptop without losing my mind." one command gets a fresh mac from zero to fully configured — shell, editor, git, terminal, window manager, the works.
+
+## the profile system
+
+not every machine needs the same stuff. my work laptop doesn't need freecad, and a server doesn't need raycast. so the whole thing is profile-aware:
+
+- **work** — full dev setup with all the consulting tools
+- **personal** — creative apps, hobby projects, the fun stuff
+- **server** — minimal, no GUI
+- **container** — bare essentials for containerized environments
+
+you pick a profile and everything — brewfiles, git identity, ssh config, symlinks — adjusts accordingly.
+
+## layered brewfiles
+
+instead of one giant brewfile, dependencies are split into layers:
+
+- **base** — core CLI tools (git, ripgrep, fd, fzf, bat, neovim, fish, etc.)
+- **gui** — desktop apps (wezterm, raycast, 1password, aerospace)
+- **dev** — development-specific tools (language servers, postico, colima)
+- **creative** — design and media tools (gimp, inkscape, obs)
+- **infra** — cloud and kubernetes tooling
+- **experimental** — stuff i'm trying out (30-day rule: use it or lose it)
+
+profiles pick which layers they need. `work` gets base + gui + dev + infra. `personal` gets base + gui + dev + creative. you get the idea.
+
+## theme system
+
+i have a unified theming system that switches dark/light mode across the terminal, editor, shell prompt, and status bar all at once:
+
+```bash
+theme set catppuccin-mocha   # dark mode everywhere
+theme light                  # switch to light variants
+theme current                # what am i using right now?
+```
+
+## what else is in here
+
+- **fish shell** config with starship prompt, zoxide, atuin for shell history
+- **neovim** config (this is its own rabbit hole)
+- **wezterm** config in lua
+- **karabiner** for keyboard remapping
+- **sketchybar** for a custom macos status bar
+- **hammerspoon** for macos automation
+- **git config** with profile-based `includeIf` for work vs personal identity
+- **idempotent setup** — run `./install.sh` as many times as you want, it converges to the right state
+- a `dotfiles doctor` command that health-checks everything
+
+## why
+
+i like my machines to feel like mine immediately. i also mass-reinstall macos more often than a normal person should. having a single `curl | bash` that gets me from factory reset to productive in under an hour is worth every minute i've spent on this repo.
+
+it's a little overengineered. i'm aware. it sparks joy.

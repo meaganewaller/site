@@ -1,0 +1,46 @@
+---
+title: "fiber_pattern"
+summary: "A Ruby gem for pattern sizing, stitch repeat alignment, and gauge scaling between a pattern's gauge and a knitter's gauge."
+status: "active"
+stack: "ruby"
+repo: "https://github.com/meaganewaller/craftos"
+---
+
+## what is it
+
+fiber_pattern builds on [fiber_gauge](/projects/fiber-gauge) and [fiber_units](/projects/fiber-units) to handle the trickier parts of pattern math: sizing a piece to a target width, aligning stitch counts to pattern repeats, and scaling a pattern from one gauge to another.
+
+## what it does
+
+- **sizing** — give it a gauge and a desired width, and it tells you how many stitches to cast on. if you have a stitch repeat, it rounds up to the nearest valid count.
+- **repeats** — models a stitch repeat with a multiple and optional offset. a k2, p2 rib is a repeat of 4. a crochet shell pattern might repeat every 6 stitches plus a turning chain. it adjusts your cast-on or foundation chain count so the repeat fits evenly.
+- **scaling** — when your gauge doesn't match the pattern's gauge, this recalculates stitch and row counts so the finished dimensions stay the same.
+
+## why
+
+i kept doing this math by hand and making mistakes, especially with repeats. "ok, i need 171 stitches, but my pattern repeats every 8 plus 3... so..." — whether it's a knitting cable panel or a crochet fan stitch, now i let the code handle it.
+
+## example
+
+```ruby
+# knitting: align to a k2, p2 rib
+rib = FiberPattern::Repeat.new(
+  multiple: 4.stitches,
+  offset: 2.stitches  # edge stitches
+)
+rib.adjust(171.stitches) # => 174.stitches (43 repeats + 2)
+
+# crochet: align to a shell pattern
+shell = FiberPattern::Repeat.new(
+  multiple: 6.stitches,
+  offset: 1.stitches  # turning chain
+)
+shell.adjust(50.stitches) # => 55.stitches (9 repeats + 1)
+
+# scale a knit pattern to your crochet gauge
+FiberPattern::Scaling.scale_stitches(
+  80.stitches,
+  pattern_gauge,  # 5 spi
+  my_gauge         # 3.5 spi
+) # => 56.stitches
+```

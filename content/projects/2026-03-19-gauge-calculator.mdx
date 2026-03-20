@@ -1,0 +1,32 @@
+---
+title: "Gauge Calculator"
+summary: "A knitting/crochet gauge calculator that does the math so you don't have to."
+status: "in progress"
+stack: "ruby, sinatra, fiber_units, fiber_gauge"
+repo: "https://github.com/meaganewaller/craftos"
+---
+
+## what is it
+
+if you knit or crochet, you know the drill: you make a swatch, count your stitches and rows, measure the width, and then do math to figure out how many stitches you actually need for your project. this tool does that last part for you.
+
+you enter your swatch measurements — stitches, rows, and width — and it calculates your stitches per inch (SPI) and rows per inch (RPI). then you can plug in your desired project width and it tells you exactly how many stitches to cast on.
+
+it even handles pattern repeats. if your stitch pattern repeats every 4 stitches (like a k2, p2 rib or a crochet shell repeat), it'll adjust your stitch count so the repeat fits evenly. you can add an offset for edge stitches or turning chains too.
+
+## how it works
+
+it's a [sinatra](https://sinatrarb.com/) app backed by two gems i wrote:
+
+- **fiber_units** — a unit conversion library for fiber craft measurements (inches, centimeters, stitches, rows)
+- **fiber_gauge** — the gauge math itself: takes your swatch data and calculates SPI, RPI, and required stitches/rows for a target dimension
+
+the frontend is a simple erb form that hits a JSON API. no javascript framework, no build step. you click a button, it does a fetch, and the results show up.
+
+## status
+
+this works locally and i'm happy with it. i haven't deployed it yet but i want to — probably on [fly.io](https://fly.io) or similar. it's part of a larger monorepo called **craftos** where i'm building out a collection of small fiber craft tools.
+
+## why
+
+i got tired of doing gauge math on my phone calculator and getting it wrong. also i wanted an excuse to write some ruby gems.

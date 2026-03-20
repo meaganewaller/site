@@ -1,0 +1,37 @@
+---
+title: "fiber_units"
+summary: "A Ruby gem for typed, unit-aware measurements in fiber arts — lengths, weights, stitch counts, and row counts."
+status: "active"
+stack: "ruby"
+repo: "https://github.com/meaganewaller/craftos"
+---
+
+## what is it
+
+fiber_units is a ruby gem that gives you typed, dimension-safe value objects for fiber craft math. instead of passing around raw numbers and hoping you remember which one is inches and which is centimeters, you write `4.inches` or `20.stitches` and the library handles the rest.
+
+## what it does
+
+- **length** — inches, centimeters, yards, meters. convert between them freely.
+- **weight** — grams, ounces. same deal.
+- **stitch counts and row counts** — first-class types, not just integers. you can't accidentally add stitches to inches.
+- **arithmetic** — add, subtract, multiply, divide measurements. operations stay in the right dimension and raise errors if you try to mix incompatible types.
+- **ratios** — divide a length by a weight and get a typed ratio back, which is useful for things like calculating yarn grist.
+- **numeric extensions** — `4.inches`, `100.grams`, `20.stitches` — reads like english, works like code.
+
+## why
+
+every fiber craft calculation involves juggling units. pattern says centimeters, your ruler is in inches, the yarn label lists yardage in meters. i kept writing the same conversion logic in different projects, so i pulled it into a gem. it's the foundation that `fiber_gauge`, `fiber_pattern`, and `yarn_skein` all build on.
+
+## example
+
+```ruby
+width = 4.inches
+same_width = width.to(:centimeters) # 10.16 cm
+
+stitches = 20.stitches
+rows = 24.rows
+
+# dimension safety — this raises an error:
+stitches + width # => FiberUnits::DimensionError
+```

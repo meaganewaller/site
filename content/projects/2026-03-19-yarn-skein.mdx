@@ -1,0 +1,40 @@
+---
+title: "yarn_skein"
+summary: "A Ruby gem for modeling yarn — fiber blends, weight categories, grist, and skein calculations."
+status: "active"
+stack: "ruby"
+repo: "https://github.com/meaganewaller/craftos"
+---
+
+## what is it
+
+yarn_skein is a ruby gem for describing yarn and doing yarn math. it models a skein with typed yardage and weight (via [fiber_units](/projects/fiber-units)), can classify yarn into standard weight categories, and calculates things like how many skeins you need for a project.
+
+## what it does
+
+- **yarn objects** — brand, line, yardage, skein weight, and fiber content as a proper value object
+- **weight categories** — automatically classifies yarn as lace, fingering, sport, DK, worsted, aran, bulky, or super bulky based on yards per 100g
+- **grist** — yardage-to-weight ratio, useful for comparing yarns
+- **skein calculations** — "i need 1200 yards, how many skeins is that?" and "i have 5 skeins, how many yards is that?"
+- **similarity check** — compares two yarns' density within a 15% tolerance to see if they're a reasonable substitute
+- **fiber blends** — model fiber content as a list of fibers with percentages
+
+## why
+
+i wanted a way to model yarn in code that wasn't just a hash of strings. when you're building tools for fiber crafts, having a real `Yarn` object that knows its weight category and can calculate skein requirements makes everything downstream cleaner.
+
+## example
+
+```ruby
+yarn = YarnSkein::Yarn.new(
+  brand: "Malabrigo",
+  line: "Rios",
+  yardage: 210.yards,
+  skein_weight: 100.grams
+)
+
+yarn.weight_category              # => :worsted
+yarn.grist                        # => Ratio(210 yards / 100 grams)
+yarn.skeins_required(1200.yards)  # => 6
+yarn.total_yardage(3)             # => 630.yards
+```
