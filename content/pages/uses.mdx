@@ -1,7 +1,66 @@
 ---
 title: Uses
-description: Discover the tools and technologies that Meagan Waller uses in her software development workflow, including her favorite programming languages, frameworks, and hardware.
+description: The tools, hardware, and software that Meagan uses for software development and daily life.
 ogImage: /images/uses-og-image.webp
 ---
 
 # uses
+
+people ask what tools i use, so here's the list. inspired by [uses.tech](https://uses.tech/).
+
+## editor & terminal
+
+- **editor:** [neovim](https://neovim.io/) — i live in the terminal and my config is a whole project unto itself
+- **terminal:** [wezterm](https://wezfurlong.org/wezterm/) (nightly) — fast, configurable in lua, what more do you want
+- **shell:** [fish](https://fishshell.com/) with [starship](https://starship.rs/) prompt
+- **font:** [victor mono](https://rubjo.github.io/victor-mono/) — i like the cursive italics, fight me
+
+## cli tools i can't live without
+
+- [ripgrep](https://github.com/BurntSushi/ripgrep) — fast search
+- [fd](https://github.com/sharkdp/fd) — fast find
+- [fzf](https://github.com/junegunn/fzf) — fuzzy finder for everything
+- [bat](https://github.com/sharkdp/bat) — cat but pretty
+- [zoxide](https://github.com/ajeetdsouza/zoxide) — smarter cd
+- [yazi](https://github.com/sxyazi/yazi) — terminal file manager
+- [atuin](https://github.com/atuinsh/atuin) — shell history that actually works
+- [delta](https://github.com/dandavella/delta) — better git diffs
+- [httpie](https://httpie.io/) — curl for humans
+- [jq](https://jqlang.github.io/jq/) / [yq](https://github.com/mikefarah/yq) — json and yaml wrangling
+
+## languages & runtimes
+
+- **ruby** — my first love (professionally speaking)
+- **typescript** — it's growing on me
+- **lua** — mostly for dotfiles configuration
+- **python** — when i need it
+- **bun** — my javascript runtime of choice because it's fast and i'm impatient
+- managed with [mise](https://mise.jdx.dev/) — one tool to rule them all
+
+## desktop & productivity
+
+- **window management:** [aerospace](https://github.com/nikitabobko/AeroSpace) — tiling wm for macos, currently trying it out
+- **launcher:** [raycast](https://www.raycast.com/) — replaced spotlight and never looked back
+- **passwords:** [1password](https://1password.com/)
+- **calendar:** [fantastical](https://flexibits.com/fantastical)
+- **notes:** [obsidian](https://obsidian.md/) and [notion](https://notion.so/)
+- **status bar:** [sketchybar](https://github.com/FelixKratz/SketchyBar) — because the default menu bar isn't customizable enough
+- **keyboard remapping:** [karabiner-elements](https://karabiner-elements.pqrs.org/)
+
+## design & creative
+
+- [gimp](https://www.gimp.org/) - free and open source image editor
+- [inkscape](https://inkscape.org/) — when i need vector stuff
+- [obs](https://obsproject.com/) — screen recording and streaming
+- [imageoptim](https://imageoptim.com/) — squishing images before they hit the web
+
+## dev tools
+
+- **git:** git + [gh cli](https://cli.github.com/) + delta for diffs
+- **containers:** docker desktop + colima
+- **database gui:** [postico](https://eggerapps.at/postico2/) for postgres
+- **linting:** [shellcheck](https://www.shellcheck.net/) for bash, [biome](https://biomejs.dev/) for js/ts
+
+## dotfiles
+
+my whole setup is managed through a [dotfiles repo](https://github.com/meaganewaller/.dotfiles) with layered brewfiles, mise for runtimes, and a bootstrap script that gets a fresh machine ready. it's a little overengineered but it sparks joy.
