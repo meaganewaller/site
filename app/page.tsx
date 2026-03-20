@@ -1,7 +1,9 @@
 import Image from 'next/image'
 import stardivider from '~/images/dividers/bouncing-stars.gif'
+import { getAll } from '@/lib/content'
 
 export default async function Home() {
+  const logs = getAll("logs");
   return (
     <section className="mx-auto my-0 w-full">
       <div className="grid grid-cols-[1fr] gap-(--layout-grid-gap) [grid-template-areas:'welcome_welcome'_'updates_updates'_'status_status'_'vibes_vibes'] lg:[grid-template-areas:'welcome_welcome'_'status_vibes'_'updates_vibes']">
@@ -44,6 +46,22 @@ export default async function Home() {
                 Changelog
               </span>
             </div>
+            <ul className="mt-4 space-y-3 list-none p-0">
+              {logs.map(log => (
+                <li key={log.slug} className="flex flex-col gap-0.5">
+                  <span className="text-xs font-mono text-on-surface/60">
+                    {log.date &&
+                      new Intl.DateTimeFormat("en-GB", { dateStyle: "medium" }).format(
+                        new Date(log.date)
+                      )}
+                  </span>
+                  <span className="text-sm font-semibold text-on-surface">{log.meta.title}</span>
+                  {log.meta.summary && (
+                    <span className="text-sm text-on-surface/80">{log.meta.summary}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
