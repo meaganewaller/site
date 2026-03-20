@@ -35,7 +35,7 @@ export const LayoutProvider = ({
 
   const normalizedPathname = normalizePathname(pathname)
   const pagePaths = new Set(['/colophon', '/about', '/start-here', '/sitemap'])
-  const slugPaths = ['category', 'posts']
+  const slugPaths = ['category', 'posts', 'projects', 'snippets', 'newsletter']
   const baseSegment = pathname?.split('/')[1] ?? ''
 
   const layoutType =

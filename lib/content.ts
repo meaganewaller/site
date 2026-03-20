@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 
-export type ContentType = "pages" | "posts" | "snippets" | "projects" | "logs";
+export type ContentType = "pages" | "posts" | "snippets" | "projects" | "logs" | "resources";
 
 export interface ContentItem {
   meta: Record<string, string>;
