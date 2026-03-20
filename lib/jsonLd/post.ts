@@ -1,6 +1,6 @@
-import type { Post } from "@/lib/articles";
+import type { ContentItem } from "@/lib/content";
 
-export const createPostJsonLd = (post: Post) => {
+export const createPostJsonLd = (post: ContentItem) => {
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
